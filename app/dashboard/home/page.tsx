@@ -103,20 +103,6 @@ export default function HomePage() {
                                     <p className="text-gray-400 text-lg mb-8 leading-relaxed">
                                         Transform your ideas into powerful applications with cutting-edge technology and stunning design.
                                     </p>
-
-                                    <motion.button
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        onClick={() => router.push('/dashboard/requestProject')}
-                                        className="w-full py-4 rounded-2xl flex items-center justify-center gap-2 relative overflow-hidden group"
-                                        style={{
-                                            background: 'linear-gradient(135deg, #00d4ff, #0066ff)',
-                                            boxShadow: '0 10px 40px rgba(0, 212, 255, 0.3)',
-                                        }}
-                                    >
-                                        <span className="font-semibold text-white text-lg">Start Project</span>
-                                        <ArrowRight className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
-                                    </motion.button>
                                 </motion.div>
                             </div>
                         </section>
@@ -155,12 +141,6 @@ export default function HomePage() {
                         <section className="px-6 mb-8">
                             <div className="flex items-center justify-between mb-6">
                                 <h2 className="text-2xl font-bold text-white">Our Services</h2>
-                                <button
-                                    onClick={() => router.push('/dashboard/services')}
-                                    className="text-[#00d4ff] text-sm flex items-center gap-1"
-                                >
-                                    View All <ArrowRight className="w-4 h-4" />
-                                </button>
                             </div>
 
                             <div className="space-y-4">

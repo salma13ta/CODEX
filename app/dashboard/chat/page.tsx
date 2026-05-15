@@ -8,28 +8,24 @@ const initialMessages = [
   {
     id: 1,
     sender: 'codex',
-    text: 'Hello! 👋 Welcome to Codex. How can we help you today?',
+    text: 'Hello! 👋 Welcome to Codex AI.\n\nWe help you build powerful Web & Mobile applications with modern technologies 🚀',
     time: '10:30 AM',
   },
   {
     id: 2,
-    sender: 'user',
-    text: "Hi! I'm interested in building a mobile app.",
-    time: '10:32 AM',
-  },
-  {
-    id: 3,
     sender: 'codex',
-    text: "Great! We'd love to help you build your mobile app. Could you tell me more about your project requirements?",
-    time: '10:33 AM',
+    text: 'Our Services:\n\n📱 Mobile App Development (Flutter)\n💻 Web Development (React & Next.js)\n⚙️ Backend Development (Node.js APIs)\n\nChoose a service below or contact us directly 👇',
+    time: '10:30 AM',
   },
 ];
 
 const quickReplies = [
-  'Tell me about pricing',
-  'I need a mobile app',
-  'Schedule a call',
-  'View portfolio',
+  '📱 Build Mobile App',
+  '💻 Build Website',
+  '⚙️ Backend System',
+  '💰 Pricing',
+  '📂 View Portfolio',
+  '💬 Contact WhatsApp',
 ];
 
 const contactMethods = [
@@ -37,7 +33,7 @@ const contactMethods = [
     icon: Phone,
     label: 'Phone',
     value: '01226694723',
-    action: 'tel:01226694723',
+    action: 'https://wa.me/201226694723',
     gradient: 'from-[#00d4ff] to-[#0066ff]',
   },
   {
@@ -84,16 +80,83 @@ export default function ChatScreen() {
     setIsTyping(true);
 
     // محاكاة رد النظام
-    setTimeout(() => {
-      setIsTyping(false);
-      const response = {
-        id: Date.now() + 1,
-        sender: 'codex',
-        text: 'Thank you for your message! Our team will get back to you shortly. 🚀',
-        time: new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }),
-      };
-      setMessages((prev) => [...prev, response]);
-    }, 1500);
+   setTimeout(() => {
+  setIsTyping(false);
+
+  let responseText = '';
+
+  if (text.includes('Mobile')) {
+    responseText = `📱 Mobile App Development
+
+We build scalable Flutter apps with:
+✔ Clean Architecture
+✔ State Management (Cubit / Bloc)
+✔ API Integration
+
+📲 WhatsApp:
+https://wa.me/201226694723`;
+  }
+
+  else if (text.includes('Website')) {
+    responseText = `💻 Web Development
+
+We create fast & modern apps using:
+✔ React.js & Next.js
+✔ Responsive UI
+✔ API Integration
+
+📲 WhatsApp:
+https://wa.me/201226694723`;
+  }
+
+  else if (text.includes('Backend')) {
+    responseText = `⚙️ Backend Development
+
+We build secure Node.js systems:
+✔ REST APIs
+✔ Authentication (JWT)
+✔ Databases
+
+📲 WhatsApp:
+https://wa.me/201226694723`;
+  }
+
+  else if (text.includes('Pricing')) {
+    responseText = `💰 Pricing depends on your project.
+
+Send us details on WhatsApp and we will give you exact quote 👇
+https://wa.me/201226694723`;
+  }
+
+  else if (text.includes('Portfolio')) {
+    responseText = `📂 You can view our work here:
+(Add your portfolio link)`;
+  }
+
+  else if (text.includes('WhatsApp')) {
+    responseText = `📲 Contact us directly:
+https://wa.me/201226694723`;
+  }
+
+  else {
+    responseText = `Thanks for your message 🙌
+
+Please choose a service or contact us directly on WhatsApp:
+https://wa.me/201226694723`;
+  }
+
+  const response = {
+    id: Date.now() + 1,
+    sender: 'codex',
+    text: responseText,
+    time: new Date().toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+    }),
+  };
+
+  setMessages((prev) => [...prev, response]);
+}, 1200);
   };
 
   return (
@@ -108,9 +171,6 @@ export default function ChatScreen() {
               </h1>
               <p className="text-gray-500 text-sm font-medium uppercase tracking-widest mt-1">Direct Support</p>
             </div>
-            <button className="p-2 rounded-xl bg-white/5 border border-white/10 text-gray-400">
-              <MoreVertical className="w-5 h-5" />
-            </button>
           </div>
         </motion.div>
       </section>
@@ -226,17 +286,6 @@ export default function ChatScreen() {
           </motion.button>
         </div>
       </section>
-
-      {/* Floating WhatsApp FAB */}
-      <motion.a
-        href="https://wa.me/15551234567"
-        target="_blank"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className="fixed bottom-28 right-6 w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-2xl shadow-green-500/20 z-50 border-4 border-[#0a0e27]"
-      >
-        <MessageCircle className="w-6 h-6 text-white fill-white" />
-      </motion.a>
 
     </div>
   );

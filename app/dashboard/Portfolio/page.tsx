@@ -2,74 +2,140 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Download, X, Smartphone, Globe, Server } from 'lucide-react';
+import { ExternalLink, X,  Globe, Server } from 'lucide-react';
 
 const projects = [
   {
     id: 1,
-    title: 'FinTech Mobile App',
-    category: 'Mobile',
-    icon: Smartphone,
-    description: 'A comprehensive mobile banking solution with real-time transactions and AI-powered insights.',
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80',
-    technologies: ['React Native', 'Node.js', 'PostgreSQL'],
+    title: 'ABC mouse',
+    category: 'Web',
+    icon: Globe,
+    description: 'A colorful and playful website created for kids, offering an easy and enjoyable experience with interactive elements and friendly design.',
+    image: '/Screenshot 2026-04-25 200506.png',
+    link: 'https://abc-mouse-zwo9-qtd70boj6-salmas-projects-1976d6cf.vercel.app/',
+    technologies: ['Next.js', 'tailwindcss'],
     stats: { users: '50K+', rating: '4.8', downloads: '100K+' },
     gradient: 'from-[#00d4ff] to-[#0066ff]',
   },
   {
     id: 2,
-    title: 'E-Commerce Platform',
+    title: 'Skin Stack',
     category: 'Web',
     icon: Globe,
-    description: 'Modern e-commerce platform with AI recommendations and seamless checkout experience.',
-    image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&q=80',
-    technologies: ['Next.js', 'Stripe', 'MongoDB'],
+    description: 'Skin Stack is a smart skincare platform that generates personalized daily routines and recommendations using external APIs, helping users maintain healthy and consistent skin care habits.',
+    image: '/Screenshot 2026-04-25 202228.png',
+    link: 'https://skinstack-ui77-hibdb5pwd-salmas-projects-1976d6cf.vercel.app/',
+    technologies: ['Next.js', 'fakeapi', 'tailwindcss'],
     stats: { users: '30K+', rating: '4.9', orders: '250K+' },
     gradient: 'from-[#00ffff] to-[#00d4ff]',
   },
   {
     id: 3,
-    title: 'Healthcare Portal',
+    title: 'Travel.',
     category: 'Web',
     icon: Globe,
-    description: 'Patient management system with telemedicine capabilities and secure data storage.',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80',
-    technologies: ['React', 'GraphQL', 'AWS'],
+    description: 'An interactive travel booking interface that allows users to customize their trip by selecting travelers, room types, and duration with real-time price calculation and discount handling.',
+    image: '/Screenshot 2026-04-25 203942.png',
+    link: 'https://travel-1-pxcq-pg31jru33-salmas-projects-1976d6cf.vercel.app/',
+    technologies: ['React', 'API Integration', 'JavaScript', 'UI/UX Design'],
     stats: { users: '20K+', rating: '4.7', hospitals: '150+' },
     gradient: 'from-[#00ffff] to-[#00d4ff]',
   },
   {
     id: 4,
-    title: 'Cloud Infrastructure',
+    title: 'Candid Rabanadas',
     category: 'Backend',
     icon: Server,
     description: 'Scalable microservices architecture handling millions of requests per day.',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
-    technologies: ['Kubernetes', 'Docker', 'Redis'],
+    image: '/Screenshot 2026-04-25 205511.png',
+    link: 'https://candid-rabanadas-59cc5f.netlify.app/',
+    technologies: ['Node.js', 'Tailwind CSS', 'JavaScript', 'Node.js'],
     stats: { uptime: '99.9%', requests: '5M/day', latency: '<50ms' },
     gradient: 'from-[#8b5cf6] to-[#00d4ff]',
   },
   {
     id: 5,
-    title: 'Fitness Tracker App',
-    category: 'Mobile',
-    icon: Smartphone,
+    title: 'Farmart Eosin',
+    category: 'Backend',
+    icon: Server,
     description: 'AI-powered fitness companion with personalized workout plans and nutrition tracking.',
-    image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80',
-    technologies: ['Flutter', 'Firebase', 'TensorFlow'],
+    image: '/Screenshot 2026-04-25 205638.png',
+    link: 'https://farmart-eosin.vercel.app/#/',
+    technologies: ['Node.js', 'Tailwind CSS', 'JavaScript', 'Node.js'],
     stats: { users: '75K+', rating: '4.9', workouts: '1M+' },
     gradient: 'from-[#00d4ff] to-[#0066ff]',
   },
   {
     id: 6,
-    title: 'Social Network API',
+    title: 'E-learn',
+    category: 'Backend',
+    icon: Server,
+    description: 'A full-stack e-learning platform with secure authentication, course management, progress tracking, and a modern responsive interface for students and administrators.',
+    image: '/Screenshot 2026-04-25 210007.png',
+    link: 'https://e-learn-platform-five.vercel.app/',
+    technologies: ['Node.js', 'Tailwind CSS', 'JavaScript', 'Next.js'],
+    stats: { uptime: '99.95%', users: '100K+', messages: '10M/day' },
+    gradient: 'from-[#8b5cf6] to-[#00d4ff]',
+  },
+  {
+    id: 7,
+    title: 'Amazing Torte',
+    category: 'Backend',
+    icon: Server,
+    description: 'A modern business services website featuring responsive design, service showcases, smooth navigation, and a clean interface to present business solutions professionally.',
+    image: '/Screenshot 2026-04-25 210252.png',
+    link: 'https://amazing-torte-ef2cad.netlify.app/',
+    technologies: ['React.js', 'Tailwind CSS', 'JavaScript'],
+    stats: { uptime: '99.95%', users: '100K+', messages: '10M/day' },
+    gradient: 'from-[#8b5cf6] to-[#00d4ff]',
+  },
+  {
+    id: 8,
+    title: 'Cosmic Longma',
     category: 'Backend',
     icon: Server,
     description: 'High-performance API serving a social platform with real-time messaging.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+    image: '/Screenshot 2026-04-25 211302.png',
+    link: 'https://cosmic-longma-458e84.netlify.app/',
     technologies: ['Node.js', 'WebSocket', 'PostgreSQL'],
     stats: { uptime: '99.95%', users: '100K+', messages: '10M/day' },
     gradient: 'from-[#8b5cf6] to-[#00d4ff]',
+  },
+  {
+    id: 9,
+    title: 'Movieo app',
+    category: 'Backend',
+    icon: Server,
+    description: 'High-performance API serving a social platform with real-time messaging.',
+    image: '/Screenshot 2026-04-25 210949.png',
+    link: 'https://movieoapp-lilac.vercel.app/',
+    technologies: ['Node.js', 'WebSocket', 'PostgreSQL'],
+    stats: { uptime: '99.95%', users: '100K+', messages: '10M/day' },
+    gradient: 'from-[#8b5cf6] to-[#00d4ff]',
+  },
+  {
+    id: 10,
+    title: 'ALODAH',
+    category: 'web',
+    icon: Globe,
+    description: 'A modern platform for preserving tribal heritage and genealogy, featuring historical archives, notable figures, poetry collections, photo galleries, and an interactive family tree within a fully responsive Arabic interface.',
+    image: '/neonbites-profile.jpeg',
+    link: 'https://www.alodah.net/',
+    technologies: ['React.js', 'Tailwind CSS','JavaScript'],
+    stats: { uptime: '99.95%', users: '10K+', orders: '5K+' },
+    gradient: 'from-[#8b5cf6] to-[#00d4ff]',
+  },
+    {
+    id: 11,
+    title: 'Neonbites',
+    category: 'Web',
+    icon: Globe,
+    description: 'A modern and visually engaging restaurant website designed to deliver an immersive food ordering experience. The platform features interactive menus, smooth animations, responsive layouts, and a stylish UI that highlights featured meals and promotions while ensuring seamless navigation across all devices.',
+    image: '/Screenshot 2026-05-15 153220.png',
+    link: 'https://neonbites.vercel.app/',
+    technologies: ['Next.js','Tailwind CSS', 'Framer Motion', 'JavaScript'],
+    stats: { users: '50K+', rating: '4.8', downloads: '100K+' },
+    gradient: 'from-[#00d4ff] to-[#0066ff]',
   },
 ];
 
@@ -110,11 +176,10 @@ export default function PortfolioScreen() {
               key={category}
               whileTap={{ scale: 0.95 }}
               onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-full whitespace-nowrap border transition-all duration-300 ${
-                selectedCategory === category
-                  ? 'bg-gradient-to-r from-[#00d4ff] to-[#0066ff] border-transparent text-white shadow-lg shadow-blue-500/20'
-                  : 'bg-[#1a1f3a]/60 border-blue-400/20 text-gray-400 hover:border-blue-400/40'
-              }`}
+              className={`px-6 py-2 rounded-full whitespace-nowrap border transition-all duration-300 ${selectedCategory === category
+                ? 'bg-gradient-to-r from-[#00d4ff] to-[#0066ff] border-transparent text-white shadow-lg shadow-blue-500/20'
+                : 'bg-[#1a1f3a]/60 border-blue-400/20 text-gray-400 hover:border-blue-400/40'
+                }`}
             >
               {category}
             </motion.button>
@@ -148,7 +213,7 @@ export default function PortfolioScreen() {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e27] via-transparent to-transparent" />
-                    
+
                     {/* Category Badge */}
                     <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium bg-blue-500/20 border border-blue-400/30 backdrop-blur-xl text-[#00d4ff]">
                       {project.category}
@@ -212,7 +277,7 @@ export default function PortfolioScreen() {
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e27] to-transparent" />
-                  <button 
+                  <button
                     onClick={() => setSelectedProject(null)}
                     className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/40 border border-white/20 flex items-center justify-center text-white hover:bg-black/60 transition-colors"
                   >
@@ -248,12 +313,11 @@ export default function PortfolioScreen() {
 
                   {/* Actions */}
                   <div className="flex gap-4">
-                    <button className="flex-1 py-4 rounded-2xl bg-gradient-to-r from-[#00d4ff] to-[#0066ff] text-white font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+                    <button
+                      onClick={() => selectedProject.link && window.open(selectedProject.link, '_blank')}
+                      className="flex-1 py-4 rounded-2xl bg-gradient-to-r from-[#00d4ff] to-[#0066ff] text-white font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
                       <ExternalLink size={20} />
                       Live Preview
-                    </button>
-                    <button className="px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-[#00d4ff] hover:bg-white/10 transition-colors">
-                      <Download size={20} />
                     </button>
                   </div>
                 </div>

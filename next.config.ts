@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // ضعه مباشرة هنا وليس داخل experimental
-  allowedDevOrigins: ['192.168.1.5', '192.168.1.3', '192.168.1.10'],
+  allowedDevOrigins: ['192.168.1.4', '192.168.1.5', '192.168.1.21', 'localhost:3000'],
 };
 
-export default nextConfig;
+module.exports = nextConfig;

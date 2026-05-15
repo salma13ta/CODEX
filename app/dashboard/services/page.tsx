@@ -3,63 +3,84 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'; // تأكد من تثبيت framer-motion
 import { useRouter } from 'next/navigation'; // استخدام Next.js Router بدلاً من react-router
-import { 
+import {
   Smartphone, Globe, Server, ArrowRight, Check,
   Code2, Palette, Rocket, Shield, Zap, Users
 } from 'lucide-react';
 
 const services = [
-  {
-    id: 'mobile',
-    icon: Smartphone,
-    title: 'Mobile Development',
-    subtitle: 'iOS & Android Apps',
-    description: 'Native and cross-platform mobile applications built with React Native, Flutter, and Swift/Kotlin.',
-    gradient: 'from-[#00d4ff] to-[#0066ff]',
-    features: [
-      'Native iOS & Android',
-      'Cross-platform with React Native',
-      'Flutter development',
-      'App Store optimization',
-      'Push notifications',
-      'Offline functionality',
-    ],
-    technologies: ['React Native', 'Flutter', 'Swift', 'Kotlin', 'Firebase'],
-  },
-  {
-    id: 'web',
-    icon: Globe,
-    title: 'Web Development',
-    subtitle: 'Modern Web Apps',
-    description: 'Responsive, high-performance web applications with cutting-edge frameworks and beautiful UI/UX.',
-    gradient: 'from-[#00ffff] to-[#00d4ff]',
-    features: [
-      'Responsive design',
-      'Progressive Web Apps',
-      'SEO optimization',
-      'Real-time features',
-      'E-commerce solutions',
-      'Custom CMS',
-    ],
-    technologies: ['React', 'Next.js', 'Vue', 'TypeScript', 'Tailwind CSS'],
-  },
-  {
-    id: 'backend',
-    icon: Server,
-    title: 'Backend Systems',
-    subtitle: 'Scalable Infrastructure',
-    description: 'Robust, scalable backend systems with cloud integration, APIs, and database management.',
-    gradient: 'from-[#8b5cf6] to-[#00d4ff]',
-    features: [
-      'RESTful & GraphQL APIs',
-      'Cloud deployment',
-      'Database optimization',
-      'Authentication & security',
-      'Microservices architecture',
-      'Third-party integrations',
-    ],
-    technologies: ['Node.js', 'Python', 'AWS', 'PostgreSQL', 'MongoDB'],
-  },
+{
+  id: 'mobile',
+  icon: Smartphone,
+  title: 'Flutter Development',
+  subtitle: 'Cross-Platform Mobile Apps',
+  description: 'Building scalable Flutter applications using Clean Architecture, MVVM, and modern state management solutions.',
+  gradient: 'from-[#00d4ff] to-[#0066ff]',
+  features: [
+    'Clean Architecture implementation',
+    'State Management (Cubit / Bloc)',
+    'API Integration (REST APIs)',
+    'MVVM Architecture',
+    'Responsive UI Design',
+    'Local Storage & Offline Support',
+  ],
+  technologies: [
+    'Flutter',
+    'Dart',
+    'Bloc / Cubit',
+    'Provider',
+    'Firebase',
+    'REST APIs',
+    'Dio / HTTP',
+  ],
+},
+{
+  id: 'web',
+  icon: Globe,
+  title: 'Frontend Development',
+  subtitle: 'React.js & Next.js',
+  description: 'Building modern, scalable, and high-performance web applications using React and Next.js with a focus on clean architecture and user experience.',
+  gradient: 'from-[#00ffff] to-[#00d4ff]',
+  features: [
+    'Responsive & Mobile-First Design',
+    'Reusable Components Architecture',
+    'State Management (Redux Toolkit)',
+    'API Integration (REST APIs)',
+    'Performance Optimization',
+    'Interactive UI & Animations',
+  ],
+  technologies: [
+    'React.js',
+    'Next.js',
+    'TypeScript',
+    'Redux Toolkit',
+    'Tailwind CSS',
+  ],
+},
+{
+  id: 'backend',
+  icon: Server,
+  title: 'Backend Development',
+  subtitle: 'Node.js & Scalable APIs',
+  description: 'Backend Developer (Node.js) specializing in building secure, scalable, and production-ready systems that help businesses grow efficiently.',
+  gradient: 'from-[#8b5cf6] to-[#00d4ff]',
+  features: [
+    'RESTful API Development',
+    'Authentication & Authorization (JWT)',
+    'Booking Systems & Business Logic',
+    'Admin Dashboards & Custom Solutions',
+    'Database Design & Optimization',
+    'Performance & Security Best Practices',
+  ],
+  technologies: [
+    'Node.js',
+    'Express.js',
+    'MongoDB',
+    'PostgreSQL',
+    'JWT',
+    'REST APIs',
+  ],
+},
 ];
 
 const additionalServices = [
@@ -84,7 +105,7 @@ export default function ServicesScreen() {
           animate={{ opacity: 1, y: 0 }}
         >
           <h1 className="text-3xl font-bold mb-2">
-            <span className="bg-gradient-to-r from-[#00d4ff] to-[#00ffff] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[#00d4ff] to-[#00ffff] bg-clip-text text-transparent">
               Our Services
             </span>
           </h1>
@@ -120,8 +141,8 @@ export default function ServicesScreen() {
                   className="p-6 cursor-pointer"
                 >
                   <div className="flex items-center gap-4 mb-4">
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-r ${service.gradient}`}
-                         style={{ boxShadow: '0 8px 20px rgba(0, 212, 255, 0.3)' }}>
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-linear-to-r ${service.gradient}`}
+                      style={{ boxShadow: '0 8px 20px rgba(0, 212, 255, 0.3)' }}>
                       <Icon className="w-7 h-7 text-white" />
                     </div>
 
@@ -160,7 +181,7 @@ export default function ServicesScreen() {
                           <div className="grid grid-cols-2 gap-3">
                             {service.features.map((feature, i) => (
                               <div key={i} className="flex items-start gap-2">
-                                <Check className="w-4 h-4 text-[#00d4ff] mt-0.5 flex-shrink-0" />
+                                <Check className="w-4 h-4 text-[#00d4ff] mt-0.5 shrink-0" />
                                 <span className="text-sm text-gray-300">{feature}</span>
                               </div>
                             ))}
@@ -185,7 +206,7 @@ export default function ServicesScreen() {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={() => router.push('/request')} // تغيير المسار حسب هيكلة Next.js لديك
-                          className={`w-full py-3 rounded-xl flex items-center justify-center gap-2 text-white font-semibold bg-gradient-to-r ${service.gradient}`}
+                          className={`w-full py-3 rounded-xl flex items-center justify-center gap-2 text-white font-semibold bg-linear-to-r ${service.gradient}`}
                         >
                           <span>Request This Service</span>
                           <ArrowRight className="w-4 h-4" />
@@ -231,14 +252,14 @@ export default function ServicesScreen() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="p-6 rounded-2xl text-center bg-gradient-to-br from-[#00d4ff1a] to-[#0066ff1a] border border-[#00d4ff4d]"
+          className="p-6 rounded-2xl text-center bg-linear-to-br from-[#00d4ff1a] to-[#0066ff1a] border border-[#00d4ff4d]"
         >
           <h3 className="text-xl font-bold text-white mb-2">Need a Custom Solution?</h3>
           <p className="text-gray-400 mb-4 text-sm">Let's discuss your unique requirements</p>
           <motion.button
             whileTap={{ scale: 0.98 }}
             onClick={() => router.push('/request')}
-            className="px-8 py-3 rounded-xl text-white font-semibold bg-gradient-to-r from-[#00d4ff] to-[#0066ff]"
+            className="px-8 py-3 rounded-xl text-white font-semibold bg-linear-to-r from-[#00d4ff] to-[#0066ff]"
           >
             Get Started
           </motion.button>
