@@ -1,5 +1,7 @@
 'use client';
-import { MainLayout } from '@/app/components/MainLayout';
+
+// استيراد الـ Layout من مجلد المكونات الصحيح وليس من صفحة splash
+import MainLayout from '@/app/components/MainLayout'; 
 
 export default function DashboardLayout({
     children,
@@ -7,4 +9,5 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     return <MainLayout>{children}</MainLayout>;
+    
 }

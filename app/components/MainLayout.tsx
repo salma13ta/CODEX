@@ -1,131 +1,114 @@
-'use client';
-import Image from 'next/image';
-import logoImage from './photo_2026-04-11_00-21-06.jpg';
-import { useRouter, usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { Home, Briefcase, FolderOpen, Download, MessageCircle, User, Bell } from 'lucide-react';
+"use client";
 
-const navItems = [
-    { path: '/dashboard/home', icon: Home, label: 'Home' },
-    { path: '/dashboard/services', icon: Briefcase, label: 'Services' },
-    { path: '/dashboard/Portfolio', icon: FolderOpen, label: 'Portfolio' },
-    // { path: '/dashboard/downloads', icon: Download, label: 'Downloads' },
-    { path: '/dashboard/profile', icon: User, label: 'Profile' },
-];
+import React, { useState, useEffect, useRef } from "react";
+import { useTheme } from "next-themes";
+import { Moon, Sun, Globe, ChevronDown } from "lucide-react";
+import { useLanguage } from "@/app/context/LanguageContext";
+import type { Lang } from "@/app/i18n/translations";
 
-export function MainLayout({ children }: { children: React.ReactNode }) {
-    const router = useRouter();
-    const pathname = usePathname();
+function Navbar() {
+    const { theme, setTheme } = useTheme();
+    const { lang, setLang, t } = useLanguage();
+    const [mounted, setMounted] = useState(false);
+    const [langOpen, setLangOpen] = useState(false);
+    const langRef = useRef<HTMLDivElement>(null);
 
-    const isActive = (path: string) => {
-        if (path === '/dashboard/home') {
-            return pathname === '/dashboard/home';
-        }
-        return pathname.startsWith(path);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (langRef.current && !langRef.current.contains(e.target as Node)) {
+                setLangOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    const selectLang = (next: Lang) => {
+        setLang(next);
+        setLangOpen(false);
     };
 
+    const isDark = mounted && theme === "dark";
+
     return (
-        <div className="min-h-screen flex flex-col"
-            style={{ background: 'linear-gradient(135deg, #0a0e27 0%, #050810 100%)' }}>
-            {/* Header */}
-            <header className="relative z-20 px-6 py-4 flex items-center justify-between"
-                style={{
-                    background: 'rgba(26, 31, 58, 0.6)',
-                    borderBottom: '1px solid rgba(0, 212, 255, 0.1)',
-                    backdropFilter: 'blur(10px)',
-                }}>
-                <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center"
-                        style={{
-                            background: 'linear-gradient(135deg, #00d4ff, #0066ff)',
-                            boxShadow: '0 4px 15px rgba(0, 212, 255, 0.3)',
-                        }}>
-                        <Image
-                            src={logoImage}
-                            alt="Codex logo"
-                            width={36}
-                            height={36}
-                            className="rounded-full"
-                        />
-                    </div>
-                    <h1 className="text-xl font-bold"
-                        style={{
-                            background: 'linear-gradient(135deg, #00d4ff, #00ffff)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                        }}>
-                        CODEX
-                    </h1>
+        <header dir="ltr" className="fixed top-0 inset-x-0 z-50 h-16 border-b border-app-border bg-app-nav transition-colors duration-300">
+            <nav className="h-full px-6 md:px-12 flex items-center justify-between">
+
+                <div className="text-2xl tracking-tighter text-app-text select-none cursor-pointer">
+                    <span className="text-emerald-600 dark:text-emerald-400 matemasie-font" style={{ fontFamily: "'Matemasie', sans-serif" }}>{t("nav.brand")}</span>
                 </div>
 
-                {/* <motion.button
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => router.push('/dashboard/notifications')}
-                    className="relative w-10 h-10 rounded-full flex items-center justify-center"
-                    style={{
-                        background: 'rgba(26, 31, 58, 0.6)',
-                        border: '1px solid rgba(0, 212, 255, 0.2)',
-                    }}
-                >
-                    <Bell className="w-5 h-5 text-[#00d4ff]" />
-                    <span className="absolute top-1 right-1 w-2 h-2 bg-[#00ffff] rounded-full" />
-                </motion.button> */}
-            </header>
+                <div className="flex items-center gap-4">
 
-            {/* Main Content */}
-            <main className="flex-1 overflow-y-auto pb-20">
-                {children}
-            </main>
+                    <div ref={langRef} className="relative">
+                        <button
+                            type="button"
+                            onClick={() => setLangOpen((open) => !open)}
+                            className="flex items-center gap-1 px-3 py-1.5 rounded-full border border-app-border bg-app-card text-app-text text-sm font-medium cursor-pointer hover:opacity-80 transition-all"
+                            aria-expanded={langOpen}
+                            aria-haspopup="listbox"
+                        >
+                            <Globe className="w-4 h-4 dash-muted" />
+                            <span>{lang === "ar" ? t("nav.lang.ar") : t("nav.lang.en")}</span>
+                            <ChevronDown className={`w-3 h-3 dash-muted transition-transform ${langOpen ? "rotate-180" : ""}`} />
+                        </button>
 
-            {/* Bottom Navigation */}
-            <nav className="fixed bottom-0 left-0 right-0 z-30 px-4 pb-6 pt-2"
-                style={{
-                    background: 'linear-gradient(to top, rgba(5, 8, 16, 0.98), rgba(10, 14, 39, 0.95))',
-                    borderTop: '1px solid rgba(0, 212, 255, 0.1)',
-                    backdropFilter: 'blur(20px)',
-                }}>
-                <div className="flex items-center justify-around max-w-md mx-auto">
-                    {navItems.map((item) => {
-                        const Icon = item.icon;
-                        const active = isActive(item.path);
+                        {langOpen && (
+                            <div className="absolute end-0 mt-2 min-w-[120px] rounded-xl border border-app-border bg-app-card shadow-lg overflow-hidden z-50">
+                                {(["en", "ar"] as Lang[]).map((code) => (
+                                    <button
+                                        key={code}
+                                        type="button"
+                                        onClick={() => selectLang(code)}
+                                        className={`w-full px-4 py-2.5 text-sm text-start transition-colors hover:opacity-80 ${lang === code ? "text-emerald-600 dark:text-emerald-400 font-semibold" : "text-app-text"}`}
+                                    >
+                                        {code === "en" ? t("nav.lang.en") : t("nav.lang.ar")}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
 
-                        return (
-                            <motion.button
-                                key={item.path}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => router.push(item.path)}
-                                className="relative flex flex-col items-center gap-1 py-2 px-4"
-                            >
-                                {active && (
-                                    <motion.div
-                                        layoutId="activeTab"
-                                        className="absolute inset-0 rounded-2xl"
-                                        style={{
-                                            background: 'rgba(0, 212, 255, 0.1)',
-                                            border: '1px solid rgba(0, 212, 255, 0.3)',
-                                        }}
-                                        transition={{ type: 'spring', duration: 0.6 }}
-                                    />
-                                )}
+                    <button
+                        onClick={() => setTheme(isDark ? "light" : "dark")}
+                        className="relative w-14 h-8 rounded-full border border-app-border bg-app-card p-1 flex items-center justify-between cursor-pointer transition-all duration-300"
+                        aria-label={t("nav.toggleTheme")}
+                    >
+                        <Sun className="w-3.5 h-3.5 text-amber-500 ms-1 opacity-100 dark:opacity-40 transition-opacity" />
+                        <Moon className="w-3.5 h-3.5 text-indigo-400 me-1 opacity-40 dark:opacity-100 transition-opacity" />
 
-                                <div className="relative">
-                                    <Icon
-                                        className={`w-6 h-6 transition-colors ${active ? 'text-[#00d4ff]' : 'text-gray-400'
-                                            }`}
-                                        style={active ? { filter: 'drop-shadow(0 0 8px rgba(0, 212, 255, 0.6))' } : {}}
-                                    />
-                                </div>
+                        <div
+                            className={`absolute top-[3px] left-[3px] w-6 h-6 rounded-full bg-app-nav border border-app-border shadow-md flex items-center justify-center transition-transform duration-300 ${isDark ? "translate-x-6" : "translate-x-0"}`}
+                        >
+                            {isDark ? (
+                                <Moon className="w-3.5 h-3.5 text-indigo-400 fill-indigo-400/20" />
+                            ) : (
+                                <Sun className="w-3.5 h-3.5 text-amber-500" />
+                            )}
+                        </div>
+                    </button>
 
-                                <span className={`text-xs transition-colors ${active ? 'text-[#00d4ff]' : 'text-gray-500'
-                                    }`}>
-                                    {item.label}
-                                </span>
-                            </motion.button>
-                        );
-                    })}
                 </div>
             </nav>
+        </header>
+    );
+}
 
+export default function MainLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
+    const { dir } = useLanguage();
+
+    return (
+        <div dir={dir} className="min-h-screen bg-app-bg text-app-text transition-colors duration-300">
+            <Navbar />
+            <main className="pt-16">{children}</main>
         </div>
     );
 }

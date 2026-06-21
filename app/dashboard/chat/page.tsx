@@ -160,24 +160,23 @@ https://wa.me/201226694723`;
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#0a0e27] text-white">
+    <div className="dash-page flex flex-col min-h-[calc(100vh-4rem)]">
       {/* Header */}
-      <section className="px-6 pt-10 pb-4 shrink-0">
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
+      <section className="page-px pt-8 sm:pt-10 pb-4 shrink-0">
+        <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }}>
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-3xl font-black bg-gradient-to-r from-[#00d4ff] to-[#00ffff] bg-clip-text text-transparent">
+              <h1 className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-[#00d4ff] to-[#00ffff] bg-clip-text text-transparent">
                 Contact Us
               </h1>
-              <p className="text-gray-500 text-sm font-medium uppercase tracking-widest mt-1">Direct Support</p>
+              <p className="text-gray-500 text-xs sm:text-sm font-medium uppercase tracking-widest mt-1">Direct Support</p>
             </div>
           </div>
         </motion.div>
       </section>
 
-      {/* Contact Grid */}
-      <section className="px-6 mb-6 shrink-0">
-        <div className="grid grid-cols-3 gap-3">
+      <section className="page-px mb-4 sm:mb-6 shrink-0">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
           {contactMethods.map((method, index) => (
             <motion.a
               key={index}
@@ -201,7 +200,7 @@ https://wa.me/201226694723`;
       {/* Messages Window */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto px-6 space-y-6 scroll-smooth custom-scrollbar"
+        className="flex-1 overflow-y-auto page-px space-y-4 sm:space-y-6 scroll-smooth no-scrollbar"
       >
         <AnimatePresence>
           {messages.map((message) => (
